@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public --no-clear"
+    "dev": "rollup -c -w -s",
+    "start": "sirv public --no-clear -s"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -18,8 +18,11 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
     "sirv-cli": "^1.0.0",
-    "stats.js": "^0.17.0",
-    "three": "^0.130.0"
+    "svelte-preprocess": "^4.7.2",
+    "svelte-routing": "^1.6.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
   }
 }
