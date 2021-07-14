@@ -1,12 +1,11 @@
 <script>
-    export let target = "";
 </script>
 
-<a href={target} class="arrow w-min p-5">
+<span class="arrow cursor-pointer w-min p-5" on:click={() => { window.scroll({ top: window.innerHeight, behavior: 'smooth' }) }}>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
     </svg>
-</a>
+</span>
 
 <style>
     @-webkit-keyframes arrow-down {
@@ -39,7 +38,7 @@
     .arrow {
         display: inline-block;
         vertical-align: middle;
-        user-select: none;
+        z-index: 0;
     }
 
     .arrow:hover,
@@ -49,9 +48,11 @@
         -webkit-animation-duration: 1s;
         -webkit-animation-timing-function: ease-in-out;
         -webkit-animation-iteration-count: 1;
+        -webkit-animation-fill-mode: none;
         animation-name: arrow-down;
         animation-duration: 1s;
         animation-timing-function: ease-in-out;
         animation-iteration-count: 1;
+        animation-fill-mode: none;
     }
 </style>
