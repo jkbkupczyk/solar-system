@@ -2,14 +2,14 @@
     import { fade, fly } from "svelte/transition";
     import ArrowDown from "../UI/ArrowDown.svelte";
     import HeaderBackground from "./HeaderBackground.svelte";
+    import TextState from "../UI/TextState.svelte";
 </script>
 
-<HeaderBackground />
-
-<header in:fade={{ duration: 2048 }} class="w-full h-screen grid place-content-center m-0 p-0 text-gray-200 header uppercase">
-    <p>Solar System</p>
-    <div class="flex justify-center">
-        <ArrowDown target="#about" />
+<header class="w-full h-screen grid place-content-center select-none m-0 p-0 text-2xl text-center sm:text-3xl md:text-4xl text-gray-200 header uppercase">
+    <HeaderBackground />
+    <p in:fade={{ duration: 2048 }}>Solar System</p>
+    <div class="arrow-container flex justify-center" in:fly={{ y: window.innerHeight, duration: 3072 }}>
+        <ArrowDown />
     </div>
 </header>
 
@@ -17,7 +17,13 @@
     .header {
         font-family: Helvetica, sans-serif;
         font-weight: 300;
-        font-size: 2.5rem;
         letter-spacing: 0.25rem;
+    }
+
+    @media screen and (max-width: 200px) {
+        .header {
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+        }
     }
 </style>

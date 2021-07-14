@@ -9,13 +9,12 @@
     });
 </script>
 
-<canvas id="canvas" bind:this={canvas} />
+<div class="flex absolute w-full h-full">
+    <canvas id="canvas" class="block inset-0 w-full h-full overflow-hidden" width="100%" height="100%" bind:this={canvas} />
+</div>
 
 <style>
     #canvas {
-        position: absolute;
         z-index: -1;
-        top: 0;
-        left: 0;
     }
 </style>
