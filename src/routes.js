@@ -1,7 +1,7 @@
-import Home from "./components/Main/Home.svelte";
-import Scene from "./components/Scene.svelte";
+import Home from "./pages/Home.svelte";
+import Scene from "./pages/Scene.svelte";
 
 export const routes = [
-    { path: "/", name: "Home", component: Home },
-    { path: "/scene", name: "Scene", component: Scene }
+    { path: "/", component: Home },
+    { path: "/scene", component: Scene }
 ];
