@@ -5,6 +5,11 @@ module.exports = {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
+  variants: {
+    extend: {
+      padding: ['hover'],
+    }
+  },
   plugins: [],
   darkMode: "media",
   purge: {

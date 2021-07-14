@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w -s",
-    "start": "sirv public --no-clear -s"
+    "dev": "rollup -c -w",
+    "start": "sirv public --single"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
@@ -21,8 +22,10 @@
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.35",
     "sirv-cli": "^1.0.0",
+    "stats.js": "^0.17.0",
     "svelte-preprocess": "^4.7.2",
     "svelte-routing": "^1.6.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2",
+    "three": "^0.130.1"
   }
 }
