@@ -18,8 +18,18 @@
 	@tailwind components;
 	@tailwind utilities;
 
+	@layer utilities {
+		.border-radius-right {
+			border-radius: 0 .5rem .5rem 0;
+		}
+	}
+
+	body {
+		overflow-x: hidden;
+	}
+
 	body::-webkit-scrollbar {
-		width: .5rem;
+		width: .75rem;
 	}
 
 	body::-webkit-scrollbar-track {
@@ -27,15 +37,16 @@
 	}
 
 	body::-webkit-scrollbar-thumb {
-		background: rgba(229, 231, 235, 1);
+		background: rgb(229, 231, 235);
 		border-radius: 12.5%;
 	}
 
 	body::-webkit-scrollbar-thumb:hover {
-		background: red;
+		background: rgb(176, 178, 182);
 	}
 
-	body {
-		overflow-x: hidden;
+	* {
+		/* debug only */
+		/* border: 1px solid red; */
 	}
 </style>
