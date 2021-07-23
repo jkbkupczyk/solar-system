@@ -6,4 +6,4 @@
 
 <Header />
 <Main />
-<Footer />
+<!-- <Footer /> -->

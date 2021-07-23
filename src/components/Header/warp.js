@@ -39,6 +39,8 @@ scene.add(starPoints);
 
 camera.position.z = 1400;
 
+export let idx;
+
 const animate = () => {
     if (camera.position.z <= -1300) {
         camera.position.z = 1400;
@@ -50,10 +52,10 @@ const animate = () => {
 
     renderer.render(scene, camera);
 
-    requestAnimationFrame(animate);
+    idx = requestAnimationFrame(animate);
 };
 
-const resize = () => {
+export const resize = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -68,4 +70,4 @@ export const createScene = (element) => {
     animate();
 }
 
-window.addEventListener('resize', resize);
+window.addEventListener("resize", resize);

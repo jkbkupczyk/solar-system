@@ -3,5 +3,7 @@ import Scene from "./pages/Scene.svelte";
 
 export const routes = [
     { path: "/", component: Home },
-    { path: "/scene", component: Scene }
+    { path: "/scene/:solar", component: Scene },
+    { path: "/scene/:proxima", component: Scene },
+    { path: "/scene/:trappist", component: Scene }
 ];

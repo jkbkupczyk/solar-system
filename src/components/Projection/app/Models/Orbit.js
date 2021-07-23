@@ -8,12 +8,12 @@ import Constants from "../Constants/Constants";
  * @param { Array<Number> } centroid - Orbit centroid ([x, y, z])
  */
 class Orbit {
-    constructor(radius, inclination, centroid) {
+    constructor(radius, inclination, planetaryGroup) {
         this.radius = radius;
         this.inclination = inclination;
-        this.centroid = centroid;
         this.color = 0x505050;
-        this.threeOrbitObject = this.createOrbit();
+        this.planetaryGroup = planetaryGroup;
+        this.orbit = this.createOrbit();
     }
 
     /**
@@ -34,23 +34,33 @@ class Orbit {
             );
         }
 
+        // Create geometry from 'points' (array of vectors)
         const orbitGeometry = new BufferGeometry().setFromPoints(points);
 
         // Default buffer geometry rotation is 90°, we want to make it 0° + inclination instead
         orbitGeometry.rotateX((-Math.PI / 2) + this.inclination * Constants.degreesToRadiansRatio);
 
         const orbitMaterial = new LineBasicMaterial({ color: this.color, linewidth: 1 });
-        const orbitMesh = new Line(orbitGeometry, orbitMaterial);
+        const orbitObject = new Line(orbitGeometry, orbitMaterial);
 
         // Make setter method to change color of orbit dynamically
-        orbitMesh.setColor = (newColor) => {
-            orbitMesh.material.color.set(newColor);
+        orbitObject.setColor = (newColor) => {
+            orbitObject.material.color.set(newColor);
         }
 
-        // Set orbit centroid
-        orbitMesh.position.set(this.centroid);
+        // Sets transparency to orbit mesh
+        orbitObject.setTransparency = (transparent = false) => {
+            orbitObject.material.transparent = transparent;
+        }
 
-        return orbitMesh;
+        // Sets orbit centroid
+        orbitObject.setCentroid = (centroid) => {
+            orbitObject.position.set(centroid);
+        }
+
+        this.planetaryGroup.add(orbitObject);
+
+        return orbitObject;
     }
 }
 

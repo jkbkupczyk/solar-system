@@ -1,12 +1,10 @@
 <script>
-    import { onMount } from "svelte";
-    import { createScene } from "./warp";
+    import { onDestroy, onMount } from "svelte";
+    import { createScene, resize, idx } from "./warp";
 
     let canvas;
 
-    onMount(() => {
-        createScene(canvas);
-    });
+    onMount(() => createScene(canvas));
 </script>
 
 <div class="flex absolute w-full h-full">

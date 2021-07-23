@@ -7,8 +7,8 @@
 
 <Router {url}>
 	{#each routes as rt}
-		<Route path={rt.path}>
-			<svelte:component this={rt.component} />
+		<Route path={rt.path} let:params>
+			<svelte:component this={rt.component} system={params} />
 		</Route>
 	{/each}
 </Router>
@@ -18,9 +18,17 @@
 	@tailwind components;
 	@tailwind utilities;
 
+	.tooltip {
+		@apply invisible absolute;
+	}
+
+	.has-tooltip:hover .tooltip {
+		@apply visible z-50;
+	}
+
 	@layer utilities {
 		.border-radius-right {
-			border-radius: 0 .5rem .5rem 0;
+			border-radius: 0 0.5rem 0.5rem 0;
 		}
 	}
 
@@ -29,7 +37,7 @@
 	}
 
 	body::-webkit-scrollbar {
-		width: .75rem;
+		width: 0.75rem;
 	}
 
 	body::-webkit-scrollbar-track {
@@ -38,7 +46,7 @@
 
 	body::-webkit-scrollbar-thumb {
 		background: rgb(229, 231, 235);
-		border-radius: 12.5%;
+		border-radius: 1.25rem;
 	}
 
 	body::-webkit-scrollbar-thumb:hover {
