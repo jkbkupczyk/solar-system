@@ -15,8 +15,8 @@ class StatsManager {
             stat.domElement.style.cssText = `display: block; position: fixed; bottom: 0px; left: ${shift}px`;
             document.body.appendChild(stat.dom);
 
-            stat.setCSS = (style) => {
-                stat.domElement.style.cssText = style;
+            stat.setCSS = (cssText) => {
+                stat.domElement.style.cssText = cssText;
             }
 
             shift += 80;

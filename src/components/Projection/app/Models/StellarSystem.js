@@ -3,8 +3,8 @@ import Star from "./Star";
 /**
  * Represents stellar system with its stars, planets etc.
  * @constructor
- * @param
- * @param
+ * @param { Object } data - Stellar system data
+ * @param { Object } threeData - Contains number of ThreeJS data (scene, loaders etc.)
  */
 class StellarSystem {
     constructor(data, threeData) {

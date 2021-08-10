@@ -25,17 +25,24 @@ class Projection {
         this.statsManager.buildStats();
         this.stellarSystem = new StellarSystem(this.data, this.threeData);
 
+        // Randomize planets position
+        this.stellarSystem.planets.forEach(p => {
+            p.threeStarPlanetGroup.rotation.y = Math.random() * 100.;
+        });
+
         this.animate();
     }
 
     /**
-     * Animation loop
+     * Main Animation loop
      */
     animate() {
         this.statsManager.begin();
 
         this.stellarSystem.planets.forEach(p => {
-            p.threeStarPlanetGroup.rotation.y += 0.0005;
+            // Orbital Rotation
+            p.threeStarPlanetGroup.rotation.y += 0.00005;
+
             p.threePlanetObject.rotation.y += 0.0005;
             p.threePlanetGroup.rotation.y += 0.0005;
         });

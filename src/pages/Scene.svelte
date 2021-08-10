@@ -27,4 +27,4 @@
     <title>{capitalize(systemName)} System</title>
 </svelte:head>
 
-<PlanetaryProjection props={{ data: planetarySystems[curr].data }} />
+<PlanetaryProjection props={{ tag: planetarySystems[curr].tagged, data: planetarySystems[curr].data }} />

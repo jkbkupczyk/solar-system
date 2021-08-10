@@ -8,7 +8,7 @@ import Orbit from "./Orbit";
  * @constructor
  * @param { Object } data - Physical and orbital data for the moon
  * @param { Object } threeData - Contains number of ThreeJS data (scene, loaders etc.)
- * @param { THREE.Group } planetGroup - 
+ * @param { THREE.Group } planetGroup - Planet Group
  */
 class Moon extends CelestialObject {
     constructor(data, threeData, planetGroup) {
@@ -29,6 +29,8 @@ class Moon extends CelestialObject {
     /**
      * Creates moon
      * @method
+     * @param { String } baseMap - string url to baseMap
+     * @param { THREE.Group } planetGroup - Container with planet
      * @returns { THREE.Group } - Group (container) with moon
      */
     createMoon(baseMap, planetGroup) {
@@ -42,6 +44,7 @@ class Moon extends CelestialObject {
 
         const moonGeometry = new SphereGeometry(2 * this.diameter, 64, 64);
 
+        // Create container for moon
         const moonGroup = new Group();
 
         const moon = new Mesh(moonGeometry, moonMesh);

@@ -41,15 +41,13 @@ class ThreeData {
     }
 
     buildScene() {
-        // this.camera.position.set(-2181, 34102, 59697);
-        this.camera.position.set(1200, 256, 350);
+        this.camera.position.set(-2181, 34102, 59697);
+        // this.camera.position.set(1200, 256, 350);
         const scene = new Scene();
 
-        const light = new PointLight(0xffffff, 2.5, 700, 1);
+        const ambientLight = new AmbientLight(0xffffff);
 
-        const light2 = new AmbientLight(0xffffff);
-
-        scene.add(light2);
+        scene.add(this.light);
 
         return scene;
     }
