@@ -53,6 +53,8 @@ const animate = () => {
     renderer.render(scene, camera);
 
     idx = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(idx);
 };
 
 export const resize = () => {

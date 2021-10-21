@@ -1,6 +1,9 @@
 <script>
     export let data;
     export let projection;
+
+    // Set active menu link to Sun (Sol)
+    let current = 'Sol';
 </script>
 
 <nav class="fixed top-0 text-gray-200 w-auto md:w-64 select-none">
@@ -19,12 +22,15 @@
         </header>
 
         <div class="slide-in-top">
-            {#each data.stars as d, i}
-                <li class="text-xs md:text-base font-medium py-2 px-4 cursor-pointer hover:text-blue-600"
+            {#each data.stars as star, i}
+                <li 
+                    class="text-xs md:text-base font-medium py-2 px-4 cursor-pointer hover:text-blue-600"
+                    class:active="{current === star.name}"
                     on:click={() => {
+                        current = star.name;
                         projection.threeData.camera.position.set(projection.stellarSystem.stars[i].threeStarGroup.position.x, 60, 365);
                     }}
-                >{d.name}</li>
+                >{star.name}</li>
             {/each}
         </div>
     </ul>
@@ -45,19 +51,29 @@
 
         <div class="slide-in-top">
             {#each data.planets as d, i}
-                <li class="text-xs md:text-base font-medium py-2 px-4 cursor-pointer hover:text-blue-600"
+                <li 
+                    class="text-xs md:text-base font-medium py-2 px-4 cursor-pointer hover:text-blue-600"
+                    class:active="{current === d.name}"
                     on:click={() => {
+                        current = d.name;
                         projection.threeData.camera.position.set(projection.stellarSystem.planets[i].threePlanetObject.position.x, 0, 100);
                     }}
                     on:mouseenter={() => projection.stellarSystem.planets[i].threeOrbitObject.orbit.setColor(0x3366cc)}
                     on:mouseleave={() => projection.stellarSystem.planets[i].threeOrbitObject.orbit.setColor(0x505050)}
-                    >{d.name}</li>
+                    >
+                    <!-- <input type="radio" name="activeObject"> -->
+                    {d.name}
+                </li>
             {/each}
         </div>
     </ul>
 </nav>
 
 <style>
+    .active {
+        color: rgb(37, 99, 235);
+    }
+
     #dropdownStars:checked ~ div,
     #dropdownPlanets:checked ~ div {
         display: none;
@@ -95,9 +111,9 @@
     nav {
         z-index: 1;
     }
-
+    
     ul {
-        background: rgba(32, 32, 32, 0.25);
+        background: rgba(32, 32, 32, 0.5);
         border: 1px solid rgba(45, 45, 45, 0.85);
     }
 
@@ -105,7 +121,7 @@
         border-bottom: 1px solid rgba(45, 45, 45, 0.85);
     }
 
-    li:hover {
+    li:hover, header {
         background: rgba(32, 32, 32, 0.75);
     }
 </style>

@@ -21,7 +21,6 @@ class Projection {
      * @returns { undefined | void }
      */
     project() {
-        console.log(this.threeData.scene);
         this.statsManager.buildStats();
         this.stellarSystem = new StellarSystem(this.data, this.threeData);
 
@@ -54,6 +53,8 @@ class Projection {
 
         this.statsManager.end();
         requestAnimationFrame(this.animate.bind(this));
+
+        return cancelAnimationFrame(this.animate.bind(this));
     }
 }
 

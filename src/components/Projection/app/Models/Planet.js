@@ -50,10 +50,10 @@ class Planet extends CelestialObject {
             bumpMap: bump,
             bumpScale: bumpMap ? 0.03 : null,
             specularMap: specular,
-            specular: 0x404040, // defines how shiny the material is - dark gray
+            specular: 0x404040, // defines how shiny the material is - 0x404040 === dark gray
         });
 
-        const planetGeometry = new SphereGeometry(2*this.diameter, 32, 32);
+        const planetGeometry = new SphereGeometry(2 * this.diameter, 32, 32);
 
         return new Mesh(planetGeometry, surface);
     }
@@ -67,7 +67,7 @@ class Planet extends CelestialObject {
     createAtmosphereGraphics(cloudMap) {
         if (!cloudMap) return null;
 
-        const geometry = new SphereGeometry(2*this.diameter * 1.01, 32, 32);
+        const geometry = new SphereGeometry(2 * this.diameter * 1.01, 32, 32);
 
         const clouds = new MeshPhongMaterial({
             map: this.textureLoader.load(cloudMap),
@@ -112,6 +112,8 @@ class Planet extends CelestialObject {
 
         // Set axial tilt
         this.threeSurfaceGraphics.rotateX(this.axialTilt * Constants.degreesToRadiansRatio);
+
+        // Set distance to sun
         this.threePlanetGroup.position.set(this.orbitalLength, 0, 0);
 
         // Add atmosphere to planet
@@ -121,7 +123,6 @@ class Planet extends CelestialObject {
 
         // Add planet object (with atmosphere) to group
         this.threePlanetGroup.add(this.threeSurfaceGraphics);
-
         this.threeStarPlanetGroup.add(this.threePlanetGroup);
 
         // Add group (planet & moon) to current scene

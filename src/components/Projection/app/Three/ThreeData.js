@@ -7,7 +7,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
  */
 class ThreeData {
     constructor(canvas) {
-        this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 9999999999);
+        this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 9007199254740991);
         this.renderer = this.buildRenderer(canvas);
         this.textureLoader = new TextureLoader();
         this.light = new PointLight(0xffffff, 1, 999999, 1);

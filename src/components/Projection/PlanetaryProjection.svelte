@@ -1,8 +1,11 @@
 <script>
-    import { onMount } from "svelte";
+    import { getContext, onMount } from "svelte";
     import Projection from "./app/Projection";
     import SettingsCog from "../UI/SettingsCog.svelte";
     import Menu from "./Menu.svelte";
+    import Settings from "./Settings.svelte";
+
+    const { open } = getContext('simple-modal');
 
     export let props;
     let canvas;
@@ -13,6 +16,10 @@
         projection = new Projection(props.data, canvas);
         projection.project();
     });
+
+    const openSettings = () => {
+        open(Settings, { statsManager: projection.statsManager });
+    }
 </script>
 
 {#if !props.tag}
@@ -31,7 +38,7 @@
         <div class="absolute w-full h-full">
             <canvas id="canvas" class="block inset-0 w-full h-full overflow-hidden" width="100%" height="100%" bind:this={canvas} />
         </div>
-        <SettingsCog {projection} on:click={() => console.log("Modal") } />
+        <SettingsCog on:click={() => openSettings() } />
     </section>
 {/if}
 

@@ -3,6 +3,8 @@
     import PlanetaryProjection from "../components/Projection/PlanetaryProjection.svelte";
     import { planetarySystems } from "../data/planetarySystems";
     import { resize } from "../components/Header/warp";
+    import { capitalize } from "../shared/shared";
+    import Modal from "../components/UI/Modal.svelte";
 
     export let system;
     let systemName = Object.values(system)[0];
@@ -11,8 +13,6 @@
     onMount(() => {
         window.removeEventListener("resize", resize);
     })
-
-    const capitalize = (str) => str && str[0].toUpperCase() + str.slice(1);
 
     $: {
         switch(systemName) {
@@ -27,4 +27,6 @@
     <title>{capitalize(systemName)} System</title>
 </svelte:head>
 
-<PlanetaryProjection props={{ tag: planetarySystems[curr].tagged, data: planetarySystems[curr].data }} />
+<Modal>
+    <PlanetaryProjection props={{ tag: planetarySystems[curr].tagged, data: planetarySystems[curr].data }} />
+</Modal>
