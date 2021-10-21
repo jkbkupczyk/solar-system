@@ -2,8 +2,11 @@
     import * as svelte from "svelte";
     import { fade } from "svelte/transition";
     import { createEventDispatcher } from "svelte";
+
     const dispatch = createEventDispatcher();
+
     const baseSetContext = svelte.setContext;
+
     export let key = "simple-modal";
     export let closeButton = true;
     export let closeOnEsc = true;
@@ -18,6 +21,7 @@
     export let transitionBgProps = { duration: 250 };
     export let transitionWindow = transitionBg;
     export let transitionWindowProps = transitionBgProps;
+
     const defaultState = {
         closeButton,
         closeOnEsc,
@@ -33,19 +37,25 @@
         transitionWindowProps,
     };
     let state = { ...defaultState };
+
     let Component = null;
     let props = null;
+
     let background;
     let wrap;
     let modalWindow;
+
     const camelCaseToDash = (str) =>
         str.replace(/([a-zA-Z])(?=[A-Z])/g, "$1-").toLowerCase();
+
     const toCssString = (props) =>
         Object.keys(props).reduce(
             (str, key) => `${str}; ${camelCaseToDash(key)}: ${props[key]}`,
             ""
         );
+
     const isFunction = (f) => !!(f && f.constructor && f.call && f.apply);
+
     $: cssBg = toCssString(state.styleBg);
     $: cssWindowWrap = toCssString(state.styleWindowWrap);
     $: cssWindow = toCssString(state.styleWindow);
@@ -53,11 +63,13 @@
     $: cssCloseButton = toCssString(state.styleCloseButton);
     $: currentTransitionBg = state.transitionBg;
     $: currentTransitionWindow = state.transitionWindow;
+
     const toVoid = () => {};
     let onOpen = toVoid;
     let onClose = toVoid;
     let onOpened = toVoid;
     let onClosed = toVoid;
+
     const open = (NewComponent, newProps = {}, options = {}, callback = {}) => {
         Component = NewComponent;
         props = newProps;
@@ -79,30 +91,37 @@
             dispatch("closed");
         };
     };
+
     const close = (callback = {}) => {
         onClose = callback.onClose || onClose;
         onClosed = callback.onClosed || onClosed;
         Component = null;
         props = null;
     };
+
     const handleKeydown = (event) => {
         if (state.closeOnEsc && Component && event.key === "Escape") {
             event.preventDefault();
             close();
         }
+
         if (Component && event.key === "Tab") {
             const nodes = modalWindow.querySelectorAll("*");
             const tabbable = Array.from(nodes).filter(
                 (node) => node.tabIndex >= 0
             );
+
             let index = tabbable.indexOf(document.activeElement);
             if (index === -1 && event.shiftKey) index = 0;
+
             index += tabbable.length + (event.shiftKey ? -1 : 1);
             index %= tabbable.length;
+
             tabbable[index].focus();
             event.preventDefault();
         }
     };
+
     const handleOuterClick = (event) => {
         if (
             state.closeOnOuterClick &&
@@ -112,6 +131,7 @@
             close();
         }
     };
+
     setContext(key, { open, close });
 </script>
 
@@ -162,9 +182,15 @@
 <slot />
 
 <style>
+    :root {
+        --primaryBack: rgba(45, 45, 45, 0.85);
+        --primaryText: rgb(229, 231, 235);
+    }
+
     * {
         box-sizing: border-box;
     }
+
     .bg {
         position: fixed;
         z-index: 1000;
@@ -173,29 +199,33 @@
         justify-content: center;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.66);
+        background: rgba(0, 0, 0, 0.50);
     }
+
     .window-wrap {
         position: relative;
         margin: 2rem;
         max-height: 100%;
     }
+
     .window {
         position: relative;
         width: 40rem;
         max-width: 100%;
         max-height: 100%;
         margin: 2rem auto;
-        color: black;
-        border-radius: 0.5rem;
-        background: white;
+        color: var(--primaryText);
+        border: 1px solid rgba(80, 80, 80, 0.85);
+        background: var(--primaryBack);
     }
+
     .content {
         position: relative;
         padding: 1rem;
         max-height: calc(100vh - 4rem);
         overflow: auto;
     }
+
     .close {
         display: block;
         box-sizing: border-box;
@@ -208,14 +238,12 @@
         width: 2rem;
         height: 2rem;
         border: 0;
-        color: #2196f3;
-        border-radius: 2rem;
-        background: white;
-        box-shadow: 0 0 0 3px #2196f3;
+        color: var(--primaryText);
         transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
             background 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
         -webkit-appearance: none;
     }
+
     .close:before,
     .close:after {
         content: "";
@@ -225,11 +253,12 @@
         top: 50%;
         width: 1.5rem;
         height: 1px;
-        background: #2196f3;
+        background: var(--primaryText);
         transform-origin: center;
         transition: height 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
             background 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
+
     .close:before {
         -webkit-transform: translate(0, -50%) rotate(45deg);
         -moz-transform: translate(0, -50%) rotate(45deg);
@@ -237,6 +266,7 @@
         left: 0.25rem;
         height: 3px;
     }
+
     .close:after {
         -webkit-transform: translate(0, -50%) rotate(-45deg);
         -moz-transform: translate(0, -50%) rotate(-45deg);
@@ -244,19 +274,22 @@
         left: 0.25rem;
         height: 3px;
     }
+
     .close:hover {
         transform: rotate(180deg);
-        box-shadow: 0 0 0 4px #2196f3;
         transition: 250ms ease-in;
         cursor: pointer;
     }
+
     .close:hover:before,
     .close:hover:after {
         height: 2px;
     }
+
     .close:active {
         transform: scale(0.85);
     }
+
     .close:hover,
     .close:focus,
     .close:active {
